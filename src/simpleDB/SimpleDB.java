@@ -25,7 +25,7 @@ public class SimpleDB {
 		File create = new File(databaseName, fileName+".txt");
 		try {
 			create.createNewFile();
-			System.out.print("Ok");
+			System.out.print("Ok criado");
 		} catch (IOException e) {
 
 		}
@@ -36,14 +36,21 @@ public class SimpleDB {
 	public void use(String databaseName, String fileName)  {
 		this.databaseName = databaseName;
 		this.fileName = fileName;
-				
-		try (Scanner scan = new Scanner(System.in)) {
-			databaseName = scan.toString();
-			fileName = scan.toString();
-		}
-		System.out.println("Selected <" + databaseName +">.<" +  fileName+">");
 		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("DatabaseName: ");
+		this.databaseName = scan.nextLine();
+		System.out.println("FileName: ");
+		this.fileName = scan.nextLine();
+		scan.close();
+		
+		System.out.println("Selected <" + databaseName +">.<" +  fileName+">");
+		System.out.println("variavel this. " + databaseName );
+		System.out.println("variavel this. " + fileName );
 		
 	}
+	
+	
+	
 	
 }
