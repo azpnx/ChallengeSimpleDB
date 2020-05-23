@@ -1,6 +1,7 @@
 package simpleDB;
 
 import java.io.*;
+import java.util.*;
 
 public class SimpleDB {
 	String databaseName;
@@ -30,5 +31,19 @@ public class SimpleDB {
 		}
 
 	}
-
+	
+	// Select the directory and file to be used 
+	public void use(String databaseName, String fileName)  {
+		this.databaseName = databaseName;
+		this.fileName = fileName;
+				
+		try (Scanner scan = new Scanner(System.in)) {
+			databaseName = scan.toString();
+			fileName = scan.toString();
+		}
+		System.out.println("Selected <" + databaseName +">.<" +  fileName+">");
+		
+		
+	}
+	
 }
