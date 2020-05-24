@@ -8,6 +8,8 @@ public class SimpleDB {
 	String databaseName;
 	String fileName;
 	int lineNumber;
+	String local;
+	String value;
 
 	// Method to create a directory with the name passed in parameter.  
 	public void createDatabase(String databaseName) throws FileNotFoundException {
@@ -16,7 +18,7 @@ public class SimpleDB {
 		// Check error, if completed perfectly it returns "OK"
 		try {
 			new File(databaseName).mkdir();
-			System.out.println("OK");
+			System.out.println("simpledb> OK");
 		}catch(Exception e){	
 		}
 	}
@@ -27,7 +29,7 @@ public class SimpleDB {
 		File create = new File(databaseName, fileName+".txt");
 		try {
 			create.createNewFile();
-			System.out.print("Ok criado");
+			System.out.print("simpledb> Ok");
 		} catch (IOException e) {
 
 		}
@@ -40,13 +42,13 @@ public class SimpleDB {
 		this.fileName = fileName;
 
 		Scanner scan = new Scanner(System.in);
-		System.out.println("DatabaseName: ");
+		System.out.println("simpledb> DatabaseName: ");
 		databaseName = scan.nextLine();
-		System.out.println("FileName: ");
+		System.out.println("simpledb> FileName: ");
 		fileName = scan.nextLine();
 		scan.close();
-
-		System.out.println("Selected <" + databaseName +">.<" +  fileName+">");
+		local = databaseName +"/"+ fileName + ".txt";
+		System.out.println("simpledb> Selected <" + databaseName +">.<" +  fileName+">");
 
 	}
 
@@ -54,6 +56,20 @@ public class SimpleDB {
 	public void read(int lineNumber) throws IOException {
 		this.lineNumber = lineNumber;
 		String specific_line_text = Files.readAllLines(Paths.get(databaseName +"/"+ fileName+".txt")).get(lineNumber);
-		System.out.println(specific_line_text);
+		System.out.println("simpledb> "+specific_line_text);
+		
 	}
+	
+	// Added the input to file
+	public void insert(String value) {
+		try
+		{
+			File f=new File(local);
+			PrintWriter insertFile=new PrintWriter(new FileOutputStream(f,true));
+			insertFile.append("\n"+value);
+			insertFile.close();
+		}
+		catch(Exception e){}  
+	}
+	
 }

@@ -9,7 +9,8 @@ public class Teste {
 		SimpleDB command1 = new SimpleDB();
 
 		command1.use("myfile", "Database");
-		command1.read(3);
+		command1.insert("Loucamente");
+		command1.insert("Jhones");		
 	}
 
 }
