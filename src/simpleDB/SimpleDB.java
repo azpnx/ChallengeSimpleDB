@@ -1,11 +1,13 @@
 package simpleDB;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
 public class SimpleDB {
 	String databaseName;
 	String fileName;
+	int lineNumber;
 
 	// Method to create a directory with the name passed in parameter.  
 	public void createDatabase(String databaseName) throws FileNotFoundException {
@@ -31,26 +33,27 @@ public class SimpleDB {
 		}
 
 	}
-	
+
 	// Select the directory and file to be used 
 	public void use(String databaseName, String fileName)  {
 		this.databaseName = databaseName;
 		this.fileName = fileName;
-		
+
 		Scanner scan = new Scanner(System.in);
 		System.out.println("DatabaseName: ");
-		this.databaseName = scan.nextLine();
+		databaseName = scan.nextLine();
 		System.out.println("FileName: ");
-		this.fileName = scan.nextLine();
+		fileName = scan.nextLine();
 		scan.close();
-		
+
 		System.out.println("Selected <" + databaseName +">.<" +  fileName+">");
-		System.out.println("variavel this. " + databaseName );
-		System.out.println("variavel this. " + fileName );
-		
+
 	}
-	
-	
-	
-	
+
+	// Select the line to be read.
+	public void read(int lineNumber) throws IOException {
+		this.lineNumber = lineNumber;
+		String specific_line_text = Files.readAllLines(Paths.get(databaseName +"/"+ fileName+".txt")).get(lineNumber);
+		System.out.println(specific_line_text);
+	}
 }
