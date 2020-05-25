@@ -41,20 +41,13 @@ public class SimpleDB {
 	public void use(String databaseName, String fileName)  {
 		this.databaseName = databaseName;
 		this.fileName = fileName;
-		/*
-		Scanner scan = new Scanner(System.in);
-		System.out.println("simpledb> DatabaseName: ");
-		databaseName = scan.nextLine();
-		System.out.println("simpledb> FileName: ");
-		fileName = scan.nextLine();
-		scan.close();
-		 */
+	
 		try {
 
 			local = databaseName +"/"+ fileName + ".txt";
 			System.out.println("simpledb> Selected <" + databaseName +">.<" +  fileName+">");
 		} catch (Exception e) {
-			System.out.print("There is no such directory and file.");
+			System.out.print("simpledb> There is no such directory and file.");
 		}
 
 	}
@@ -78,10 +71,11 @@ public class SimpleDB {
 			System.out.println("Ok");
 		}
 		catch(Exception e){
-			System.out.println("There is no such directory and file.");
+			System.out.println("simpledb> There is no such directory and file.");
 		}  
 	}
 
+	// Removes a specific line and adds a value in place
 	public void update(int lineNumber, String value) throws IOException {
 		this.lineNumber = lineNumber;
 		this.value = value;
@@ -99,11 +93,12 @@ public class SimpleDB {
 			System.out.println(lines);
 
 		} catch (Exception e) {
-			System.out.print("There is no such directory and file.");
+			System.out.print("simpledb> There is no such directory and file.");
 		}
 
 	}
 
+	// Remove a specific line
 	public void delete(int lineNumber) throws IOException {
 		this.lineNumber = lineNumber;
 		try {
@@ -112,9 +107,9 @@ public class SimpleDB {
 			lines.remove(lineNumber - 1);
 			Files.write(path, lines, StandardCharsets.UTF_8);}
 		catch(Exception e) {
-			System.out.print("There is no such directory and file.");
+			System.out.print("simpledb> There is no such directory and file.");
 		}
 	}
-
-
+	
+	
 }
