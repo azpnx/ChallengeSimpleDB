@@ -41,15 +41,21 @@ public class SimpleDB {
 	public void use(String databaseName, String fileName)  {
 		this.databaseName = databaseName;
 		this.fileName = fileName;
-
+		/*
 		Scanner scan = new Scanner(System.in);
 		System.out.println("simpledb> DatabaseName: ");
 		databaseName = scan.nextLine();
 		System.out.println("simpledb> FileName: ");
 		fileName = scan.nextLine();
 		scan.close();
-		local = databaseName +"/"+ fileName + ".txt";
-		System.out.println("simpledb> Selected <" + databaseName +">.<" +  fileName+">");
+		 */
+		try {
+
+			local = databaseName +"/"+ fileName + ".txt";
+			System.out.println("simpledb> Selected <" + databaseName +">.<" +  fileName+">");
+		} catch (Exception e) {
+			System.out.print("There is no such directory and file.");
+		}
 
 	}
 
@@ -67,24 +73,47 @@ public class SimpleDB {
 		{
 			File f=new File(local);
 			PrintWriter insertFile=new PrintWriter(new FileOutputStream(f,true));
-			insertFile.append("\n"+value);
+			insertFile.append(value+"\n");
 			insertFile.close();
 			System.out.println("Ok");
 		}
-		catch(Exception e){}  
+		catch(Exception e){
+			System.out.println("There is no such directory and file.");
+		}  
 	}
 
 	public void update(int lineNumber, String value) throws IOException {
 		this.lineNumber = lineNumber;
 		this.value = value;
+		try {
 
-		Path path = Paths.get(databaseName +"/"+ fileName+".txt");
-		List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
- 
-		lines.remove(lineNumber - 1);
-		lines.add(lineNumber -1, value);
-		Files.write(path, lines, StandardCharsets.UTF_8);
 
+			Path path = Paths.get(databaseName +"/"+ fileName+".txt");
+			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+			System.out.println((lines.get(lineNumber - 1)).toString());
+			lines.remove(lineNumber - 1);
+			lines.add(lineNumber -1, value);
+			Files.write(path, lines, StandardCharsets.UTF_8);
+			System.out.println((lines.get(lineNumber - 1)).toString());
+			System.out.println(lines);
+
+		} catch (Exception e) {
+			System.out.print("There is no such directory and file.");
+		}
+
+	}
+
+	public void delete(int lineNumber) throws IOException {
+		this.lineNumber = lineNumber;
+		try {
+			Path path = Paths.get(databaseName +"/"+ fileName+".txt");
+			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+			lines.remove(lineNumber - 1);
+			Files.write(path, lines, StandardCharsets.UTF_8);}
+		catch(Exception e) {
+			System.out.print("There is no such directory and file.");
+		}
 	}
 
 

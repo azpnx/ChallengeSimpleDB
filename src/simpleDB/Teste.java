@@ -7,11 +7,20 @@ public class Teste {
 
 	public static void main(String[] args) throws IOException {
 		SimpleDB command1 = new SimpleDB();
-
-		command1.use("myfile", "Database");
-		command1.insert("Loucamente");
-		command1.insert("Jhones");
-		command1.update(2, "FUNCIONOU");
+		
+		String a;
+		String b;
+		Scanner scanj = new Scanner(System.in);
+		System.out.println("databasename >");
+		a = scanj.nextLine();
+		System.out.println("filename >");
+		b = scanj.nextLine();
+		scanj.close();
+		
+		command1.use(""+a, "" +b);
+		
+		command1.update(3, "jacare222");
+		command1.delete(2);
 	}
 
 }
