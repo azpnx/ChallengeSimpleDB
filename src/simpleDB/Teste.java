@@ -10,7 +10,8 @@ public class Teste {
 
 		command1.use("myfile", "Database");
 		command1.insert("Loucamente");
-		command1.insert("Jhones");		
+		command1.insert("Jhones");
+		command1.update(2, "FUNCIONOU");
 	}
 
 }

@@ -1,6 +1,7 @@
 package simpleDB;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 
@@ -57,9 +58,9 @@ public class SimpleDB {
 		this.lineNumber = lineNumber;
 		String specific_line_text = Files.readAllLines(Paths.get(databaseName +"/"+ fileName+".txt")).get(lineNumber);
 		System.out.println("simpledb> "+specific_line_text);
-		
+
 	}
-	
+
 	// Added the input to file
 	public void insert(String value) {
 		try
@@ -68,8 +69,23 @@ public class SimpleDB {
 			PrintWriter insertFile=new PrintWriter(new FileOutputStream(f,true));
 			insertFile.append("\n"+value);
 			insertFile.close();
+			System.out.println("Ok");
 		}
 		catch(Exception e){}  
 	}
-	
+
+	public void update(int lineNumber, String value) throws IOException {
+		this.lineNumber = lineNumber;
+		this.value = value;
+
+		Path path = Paths.get(databaseName +"/"+ fileName+".txt");
+		List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+ 
+		lines.remove(lineNumber - 1);
+		lines.add(lineNumber -1, value);
+		Files.write(path, lines, StandardCharsets.UTF_8);
+
+	}
+
+
 }
