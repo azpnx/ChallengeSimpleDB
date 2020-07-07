@@ -1,9 +1,14 @@
 package simpleDB;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class SimpleDB {
 	private String databaseName;
@@ -50,7 +55,13 @@ public class SimpleDB {
 	// Select the directory and file to be used
 	public void use(String databaseName, String fileName) {
 		path = databaseName + "/" + fileName + ".txt";
-		System.out.println("simpledb> Selected <" + databaseName + ">.<" + fileName + ".txt>");
+		File arquivo = new File(path);
+		if(arquivo.exists()){
+			System.out.println("simpledb> Selected <" + databaseName + ">.<" + fileName + ".txt>");
+		}else{
+			System.out.print("simpledb> There is no such directory and file.");
+		}
+		
 	}
 
 	// Select the line to be read.

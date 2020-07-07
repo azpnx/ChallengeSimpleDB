@@ -18,7 +18,7 @@ public class Teste {
 		 * command1.createFile(fileName);
 		 */
 
-		System.out.println(db + "File path: ");
+		System.out.println(db + "File path:");
 		System.out.print(db + "Database name: ");
 		String databaseName = sc.nextLine();
 		System.out.println(db + "File name: ");
@@ -29,11 +29,6 @@ public class Teste {
 		 * System.out.println(db + "Enter a text: "); String value = sc.nextLine();
 		 * command1.insert(value);
 		 */
-		command1.read(2);
-
-		System.out.println("Enter a line to delete: ");
-		int lineNumber = sc.nextInt();
-		command1.delete(lineNumber);
 
 		sc.close();
 	}
